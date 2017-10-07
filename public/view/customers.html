@@ -1,0 +1,20 @@
+<div class="container" ng-controller="customersController as customers">
+    <table class="table" ng-if="customers.data.length">
+        <tr class="row">
+            <th class="col-xs-4">name</th>
+            <th class="col-xs-4">address</th>
+            <th class="col-xs-4">phone</th>
+            <!--<th class="col-xs-3">createdAt</th>-->
+            <!--<th class="col-xs-3">updatedAt</th>-->
+        </tr>
+        <tr class="row" ng-repeat="customer in customers.data">
+            <td class="col-xs-4" ng-bind="customer.name"></td>
+            <td class="col-xs-4" ng-bind="customer.address"></td>
+            <td class="col-xs-4" ng-bind="customer.phone"></td>
+            <!--<td class="col-xs-2" ng-bind="customer.createdAt"></td>-->
+            <!--<td class="col-xs-2" ng-bind="customer.updatedAt"></td>-->
+        </tr>
+    </table>
+    <div class="row text-center" ng-if="!customers.data.length">No records available
+    </div>
+</div>

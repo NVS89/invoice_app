@@ -1,0 +1,20 @@
+<div class="container" ng-controller="productsController as products">
+    <div class="text-right">
+        <button class="btn btn-primary">Add product</button>
+    </div>
+    <table class="table" ng-if="products.data.length">
+        <tr class="row">
+            <th class="col-xs-6">name</th>
+            <th class="col-xs-6">Price</th>
+            <!--<th class="col-xs-3">createdAt</th>-->
+            <!--<th class="col-xs-3">updatedAt</th>-->
+        </tr>
+        <tr class="row" ng-repeat="product in products.data">
+            <td class="col-xs-6" ng-bind="product.name"></td>
+            <td class="col-xs-6" ng-bind="product.price"></td>
+            <!--<td class="col-xs-2" ng-bind="product.createdAt"></td>-->
+            <!--<td class="col-xs-2" ng-bind="product.updatedAt"></td>-->
+        </tr>
+    </table>
+    <div class="row text-center" ng-if="!(products.data.length)">no records available</div>
+</div>
