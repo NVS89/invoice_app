@@ -5,7 +5,6 @@
         .module('invoiceApp')
         .controller('customersController', customersController);
 
-    //Add List controller
     customersController.$inject = ['$scope','customerFactory'];
 
     function customersController($scope,customerFactory) {
