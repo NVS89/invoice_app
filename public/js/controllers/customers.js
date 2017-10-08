@@ -21,6 +21,20 @@
             vm.getCustomers()
         }
         initCustomer();
-
+        vm.modifyCustomer = function (id) {
+            vm.currentCustomer = {};
+            angular.forEach(vm.data, function (value,key) {
+                if(id == value.id){
+                    vm.currentCustomer = angular.copy(value,{});
+                }
+            });
+        };
+        vm.updateCustomer = function () {
+            customerFactory.updateCustomer(vm.currentCustomer).then(function (response) {
+                vm.getCustomers();
+            },function (error) {
+                console.log(error);
+            })
+        }
     }
 })();

@@ -8,7 +8,7 @@
 
     function customerFactory($http) {
         var customerFactory ={};
-        var customerUrl = '/api/customers';
+        var customerUrl = '/api/customers/';
         customerFactory.getCustomers = function () {
             return $http.get(customerUrl);
         };
@@ -18,8 +18,9 @@
         customerFactory.addCustomer = function (body) {
             return $http.post(customerUrl,body);
         };
-        customerFactory.updateCustomer = function (id,body) {
-            return $http.put(customerUrl + id, body);
+        customerFactory.updateCustomer = function (body) {
+            console.log(body);
+            return $http.put(customerUrl + body.id, body);
         };
         customerFactory.deleteCustomer = function (id) {
             return $http.delete(customerUrl + id);

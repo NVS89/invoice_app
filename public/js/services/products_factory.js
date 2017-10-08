@@ -8,7 +8,7 @@
 
     function productFactory($http) {
         var productFactory ={};
-        var productUrl = '/api/products';
+        var productUrl = '/api/products/';
         productFactory.getProducts = function () {
             return $http.get(productUrl);
         };
@@ -18,8 +18,8 @@
         productFactory.addProduct = function (body) {
             return $http.post(productUrl,body);
         };
-        productFactory.updateProduct = function (id,body) {
-            return $http.put(productUrl + id, body);
+        productFactory.updateProduct = function (body) {
+            return $http.put(productUrl + body.id, body);
         };
         productFactory.deleteProduct = function (id) {
             return $http.delete(productUrl + id);

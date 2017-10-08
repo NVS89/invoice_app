@@ -21,6 +21,20 @@
             vm.getProducts()
         }
         initProduct();
-
+        vm.modifyProduct = function (id) {
+            vm.currentProduct = {};
+            angular.forEach(vm.data, function (value,key) {
+                if(id == value.id){
+                    vm.currentProduct = angular.copy(value,{});
+                }
+            });
+        };
+        vm.updateProduct = function () {
+            productFactory.updateProduct(vm.currentProduct).then(function (response) {
+                vm.getProducts();
+            },function (error) {
+                console.log(error);
+            })
+        }
     }
 })();
