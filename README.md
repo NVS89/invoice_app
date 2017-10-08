@@ -10,7 +10,8 @@
 `npm install`
 
 ###### Run the node server
-`node app.js`
+`node app.js` or use 
+`npm server_start`
 
 ###### Viewing the application in your browser
 `http://localhost:8000`
