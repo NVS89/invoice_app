@@ -1,24 +1,38 @@
 <div class="container">
     <div class="row text-right" ng-if="!invoices.form">
-        <button class="btn btn-primary"  ng-click="invoices.form=!invoices.form">
+        <button class="btn btn-primary" ng-click="invoices.form=!invoices.form">
             Add invoice
         </button>
     </div>
 
     <div class="row" ng-if="invoices.form">
         <form>
-            <div class="col-sm-5">
-                <select class="form-control col-xs-5" id="customer">
-                    <option>Select customer</option>
-                    <option ng-repeat="customer in invoices.customers" value="{{customer.id}}">
-                        {{customer.name}}
-                    </option>
-                </select>
+            <div class="row">
+                <div class="col-sm-5">
+                    <select class="form-control col-xs-5" id="customer">
+                        <option>Select customer</option>
+                        <option ng-repeat="customer in invoices.customers" value="{{customer.id}}">
+                            {{customer.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-success btn-block" ng-click="invoices.addNewCustomer" data-toggle="modal"
+                            data-target="#addNewCustomer">Add new customer
+                    </button>
+                </div>
             </div>
             <div class="row">
-                <button class="btn btn-primary" ng-click="invoices.addProduct" data-toggle="modal"
-                        data-target="#addProduct">Add product
-                </button>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary btn-block" ng-click="invoices.addProduct" data-toggle="modal"
+                            data-target="#addProduct">Add product
+                    </button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-success btn-block" ng-click="invoices.addNewProduct" data-toggle="modal"
+                            data-target="#addNewProduct">Add new product
+                    </button>
+                </div>
             </div>
             <div class="text-right">
                 <span>total invoice amount: </span>
@@ -29,7 +43,7 @@
         </form>
     </div>
     <div ng-hide="invoices.form">
-        <table class="table" ng-if="invoices.data.length" >
+        <table class="table" ng-if="invoices.data.length">
             <tr class="row">
                 <th class="col-xs-4">customer</th>
                 <th class="col-xs-4">discount</th>
@@ -68,7 +82,8 @@
                             </th>
                             <th></th>
                         </tr>
-                        <tr class="row" ng-repeat="product in invoices.products | filter:{name: invoices.filterProdName} | filter:{price:invoices.filterProdPrice}">
+                        <tr class="row"
+                            ng-repeat="product in invoices.products | filter:{name: invoices.filterProdName} | filter:{price:invoices.filterProdPrice}">
                             <td class="col-xs-6" ng-bind="product.name"></td>
                             <td class="col-xs-6" ng-bind="product.price"></td>
                             <th>
@@ -82,6 +97,88 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cencel</button>
                 <button type="button" class="btn btn-primary">Add to invoice</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addNewProduct" tabindex="-1" role="dialog" aria-labelledby="addNewProductLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addNewProductLabel">Add Product</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Name"
+                                   ng-model="invoices.newCustomer.name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 control-label">Address</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Address"
+                                   ng-model="invoices.newCustomer.address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 control-label">Phone</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Phone"
+                                   ng-model="invoices.newCustomer.phone">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="invoices.addNewProduct()" data-dismiss="modal">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addNewCustomer" tabindex="-1" role="dialog" aria-labelledby="addNewCustomerLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addNewCustomerLabel">Add Customer</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" placeholder="Name"
+                                   ng-model="invoices.newCustomer.name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 control-label">Address</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="address" placeholder="Address"
+                                   ng-model="invoices.newCustomer.address">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 control-label">Phone</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="phone" placeholder="Phone"
+                                   ng-model="invoices.newCustomer.phone">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" ng-click="invoices.addNewCustomer()" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

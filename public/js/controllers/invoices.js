@@ -10,6 +10,8 @@
 
     function invoicesController(invoiceFactory,customerFactory,invoiceItemFactory,productFactory) {
         var vm =this;
+        vm.newProduct ={};
+
         vm.getInvoices = function () {
             invoiceFactory.getInvoices().then(function (response) {
                 vm.data = response.data;
@@ -38,6 +40,25 @@
                 console.log(error);
             })
         };
+        vm.addNewProduct = function () {
+            if(!angular.equals(vm.newProduct,{})){
+                productFactory.addProduct(vm.newProduct).then(function (response) {
+                    vm.getProducts();
+                }, function (error) {
+                    console.log(error);
+                })
+            }
+        };
+        vm.addNewCustomer = function () {
+            if(!angular.equals(vm.newCustomer,{})){
+                customerFactory.addCustomer(vm.newCustomer).then(function (response) {
+                    vm.getCustomers();
+                }, function (error) {
+                    console.log(error);
+                })
+            }
+        };
+
         function initInvoices() {
             vm.getInvoices();
             vm.getCustomers();

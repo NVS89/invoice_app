@@ -30,11 +30,13 @@
             });
         };
         vm.updateProduct = function () {
-            productFactory.updateProduct(vm.currentProduct).then(function (response) {
-                vm.getProducts();
-            },function (error) {
-                console.log(error);
-            })
+            if (!angular.equals(vm.currentCustomer, {})) {
+                productFactory.updateProduct(vm.currentProduct).then(function (response) {
+                    vm.getProducts();
+                }, function (error) {
+                    console.log(error);
+                })
+            }
         }
     }
 })();

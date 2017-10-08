@@ -30,11 +30,13 @@
             });
         };
         vm.updateCustomer = function () {
-            customerFactory.updateCustomer(vm.currentCustomer).then(function (response) {
-                vm.getCustomers();
-            },function (error) {
-                console.log(error);
-            })
+            if(!angular.equals(vm.currentCustomer,{})) {
+                customerFactory.updateCustomer(vm.currentCustomer).then(function (response) {
+                    vm.getCustomers();
+                }, function (error) {
+                    console.log(error);
+                })
+            }
         }
     }
 })();
