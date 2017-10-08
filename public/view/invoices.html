@@ -34,8 +34,36 @@
                     </button>
                 </div>
             </div>
+            <div class="row" ng-if="invoices.selectedProducts.length">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Discount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="selectedProduct in invoices.selectedProducts">
+                            <td>
+                                <input type="checkbox" ng-model="selectedProduct.markedToRemove"/>
+                            </td>
+                            <td ng-bind="selectedProduct.name"></td>
+                            <td ng-bind="selectedProduct.price"></td>
+                            <td>
+                                <input type="text" class="form-control" ng-model="selectedProduct.quantity" ng-change="invoices.totalAmountSumm()" required/>
+                            </td>
+                            <td>
+                                <input type="number" min="0" max="100" class="form-control" ng-init="selectedProduct.discount=0" ng-model="selectedProduct.discount" ng-change="invoices.totalAmountSumm()" required/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="text-right">
-                <span>total invoice amount: </span>
+                <span>Total invoice amount: <span ng-bind="invoices.totalAmount"></span> </span>
             </div>
             <div class="text-right">
                 <button type="submit" class="btn btn-default">Submit</button>
@@ -87,7 +115,7 @@
                             <td class="col-xs-6" ng-bind="product.name"></td>
                             <td class="col-xs-6" ng-bind="product.price"></td>
                             <th>
-                                <input type="checkbox">
+                                <input type="checkbox" ng-model="product.selected">
                             </th>
                         </tr>
                     </table>
@@ -96,7 +124,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cencel</button>
-                <button type="button" class="btn btn-primary">Add to invoice</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="invoices.invoiceFullfillment()">Add to invoice</button>
             </div>
         </div>
     </div>

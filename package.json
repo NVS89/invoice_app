@@ -15,9 +15,14 @@
     "sqlite3": "latest"
   },
   "devDependencies": {
-    "gulp-debug": "^3.1.0"
+    "angular-mocks": "^1.6.6",
+    "gulp-debug": "^3.1.0",
+    "jasmine-core": "^2.8.0",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0"
   },
   "scripts": {
-    "server_start":"node app.js"
+    "server_start": "node app.js"
   }
 }

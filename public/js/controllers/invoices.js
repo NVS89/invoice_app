@@ -11,6 +11,8 @@
     function invoicesController(invoiceFactory,customerFactory,invoiceItemFactory,productFactory) {
         var vm =this;
         vm.newProduct ={};
+        vm.selectedProducts=[];
+        vm.totalAmount = 0;
 
         vm.getInvoices = function () {
             invoiceFactory.getInvoices().then(function (response) {
@@ -57,6 +59,23 @@
                     console.log(error);
                 })
             }
+        };
+
+        vm.invoiceFullfillment = function () {
+            angular.forEach(vm.products, function (value,key) {
+                if(value.selected){
+                    vm.selectedProducts.push(value);
+                }
+            })
+        };
+        vm.totalAmountSumm = function () {
+            vm.totalAmount = 0;
+            angular.forEach(vm.selectedProducts, function (value,key) {
+                if(value.quantity){
+                    vm.totalAmount = parseFloat(vm.totalAmount + value.quantity*(value.price*(1 -value.discount / 100))).toFixed(2);
+                    console.log(typeof vm.totalAmount)
+                }
+            })
         };
 
         function initInvoices() {
